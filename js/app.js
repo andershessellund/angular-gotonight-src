@@ -5,6 +5,8 @@
 
   var module = angular.module('todomvc', []);
   module.controller('TodoCtrl', function($scope) {
+    $scope.newTodo = '';
+
     $scope.todos = [
       { title: 'Vis liste af eksisterende TODOs (en mock-liste til at starte med).', completed: true },
       { title: 'Markér TODO som færdig ved at klikke på flueben.', completed: false },
@@ -20,5 +22,17 @@
       { title: 'Den aktuelle side ("All"/"Active"/"Completed") skal fremhæves.', completed: false },
       { title: 'Redigér eksisterende TODO ved at dobbeltklikke på teksten og redigere.', completed: false }
     ];
+
+    $scope.addTodo = function() {
+      var newTodo = $scope.newTodo.trim();
+      if(!newTodo.length) {
+        return;
+      }
+      $scope.todos.push({
+        title: newTodo,
+        completed: false
+      });
+      $scope.newTodo = '';
+    };
   });
 })();
