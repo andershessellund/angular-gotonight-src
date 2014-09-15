@@ -4,7 +4,7 @@
   "use strict";
 
   var module = angular.module('todomvc', []);
-  module.controller('TodoCtrl', function($scope) {
+  module.controller('TodoCtrl', function($scope, filterFilter) {
     $scope.newTodo = '';
 
     $scope.todos = [
@@ -38,5 +38,16 @@
     $scope.removeTodo = function (todo) {
       $scope.todos.splice($scope.todos.indexOf(todo), 1);
     };
+
+    $scope.filters = {
+      all: null,
+      completed: { completed: true },
+      active: { completed: false }
+    };
+
+    $scope.$watch('todos', function(newTodos, oldTodos) {
+      $scope.activeCount = filterFilter($scope.todos, $scope.filters.active).length;
+    }, true);
+    
   });
 })();

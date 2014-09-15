@@ -33,7 +33,9 @@
     </ul>
   </section>
   <footer id="footer">
-    <span id="todo-count"><strong>15</strong> items left</span>
+    <span id="todo-count"><strong>{{ activeCount }}</strong>
+      <ng-pluralize count="activeCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+    </span>
     <ul id="filters">
       <li>
         <a class="selected" href="">All</a>
