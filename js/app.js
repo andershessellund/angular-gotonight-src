@@ -4,24 +4,10 @@
   "use strict";
 
   var module = angular.module('todomvc', []);
-  module.controller('TodoCtrl', function($scope, filterFilter) {
+  module.controller('TodoCtrl', function($scope, filterFilter, todoStorage) {
     $scope.newTodo = '';
 
-    $scope.todos = [
-      { title: 'Vis liste af eksisterende TODOs (en mock-liste til at starte med).', completed: true },
-      { title: 'Markér TODO som færdig ved at klikke på flueben.', completed: false },
-      { title: 'Skriv ny TODO ved at angive tekst og trykke enter.', completed: false },
-      { title: 'Fjern eksisterende TODO ved at trykke på krydset.', completed: false },
-      { title: '"XXX items left" skal vise korrekt antal.', completed: false },
-      { title: '"Clear completed (XXX)" skal rydde færdige TODOs og vise korrekt antal.', completed: false },
-      { title: 'Vis kun "main"-sektion hvis der overhovedet er nogen TODOs.', completed: false },
-      { title: 'Vis kun "footer"-sektion hvis der overhovedet er nogen TODOs.', completed: false },
-      { title: 'Mulighed for at markere/fravælge alle.', completed: false },
-      { title: 'Gem listen af TODOs i localStorage.', completed: false },
-      { title: '"All"/"Active"/"Completed" skal vise relevante TODOs.', completed: false },
-      { title: 'Den aktuelle side ("All"/"Active"/"Completed") skal fremhæves.', completed: false },
-      { title: 'Redigér eksisterende TODO ved at dobbeltklikke på teksten og redigere.', completed: false }
-    ];
+    $scope.todos = todoStorage.get();
 
     $scope.addTodo = function() {
       var newTodo = $scope.newTodo.trim();
@@ -49,6 +35,7 @@
       $scope.activeCount = filterFilter($scope.todos, $scope.filters.active).length;
       $scope.completedCount = $scope.todos.length - $scope.activeCount;
       $scope.allCompleted = $scope.activeCount === 0;
+      todoStorage.put($scope.todos);
     }, true);
 
     $scope.removeCompletedTodos = function() {

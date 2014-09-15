@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../bower_components/todomvc-common/base.css">
   <script src="../bower_components/angular/angular.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/services/todoStorage.js"></script>
 </head>
 <body ng-app="todomvc" ng-controller="TodoCtrl">
 <section id="todoapp">
@@ -20,7 +21,7 @@
     <input id="toggle-all" type="checkbox" ng-model="allCompleted" ng-click="markAll(!allCompleted)">
     <label for="toggle-all" >Mark all as complete</label>
     <ul id="todo-list">
-      <li ng-repeat="todo in todos" ng-class="{ completed: todo.completed }">
+      <li ng-repeat="todo in todos track by $index" ng-class="{ completed: todo.completed }">
         <div class="view">
           <input class="toggle" type="checkbox" ng-model="todo.completed">
           <label>{{ todo.title }}</label>
