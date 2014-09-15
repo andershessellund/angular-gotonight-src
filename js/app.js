@@ -47,7 +47,12 @@
 
     $scope.$watch('todos', function(newTodos, oldTodos) {
       $scope.activeCount = filterFilter($scope.todos, $scope.filters.active).length;
+      $scope.completedCount = $scope.todos.length - $scope.activeCount;
     }, true);
-    
+
+    $scope.removeCompletedTodos = function() {
+      $scope.todos = filterFilter($scope.todos, $scope.filters.active);
+    };
+
   });
 })();
