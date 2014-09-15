@@ -3,8 +3,8 @@
 (function() {
   "use strict";
 
-  var module = angular.module('todomvc', []);
-  module.controller('TodoCtrl', function($scope, filterFilter, todoStorage) {
+  var module = angular.module('todomvc', ['ngRoute']);
+  module.controller('TodoCtrl', function($scope, filterFilter, todoStorage, $routeParams) {
     $scope.newTodo = '';
 
     $scope.todos = todoStorage.get();
@@ -47,5 +47,23 @@
         todo.completed = completed;
       });
     };
+
+    $scope.$on('$routeChangeSuccess', function () {
+      var status = $scope.status = $routeParams.status || '';
+      $scope.statusFilter = $scope.filters[status];
+    });
+
+  });
+
+  module.config(function($routeProvider) {
+    $routeProvider.when('/', {
+      controller: 'TodoCtrl',
+      templateUrl: 'partials/todo-list.html'
+    }).when('/:status', {
+      controller: 'TodoCtrl',
+      templateUrl: 'partials/todo-list.html'
+    }).otherwise({
+      redirectTo: '/'
+    });
   });
 })();
