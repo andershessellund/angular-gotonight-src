@@ -16,7 +16,7 @@
       <input id="new-todo" placeholder="What needs to be done?" autofocus ng-model="newTodo">
     </form>
   </header>
-  <section id="main">
+  <section id="main" ng-show="todos.length">
     <input id="toggle-all" type="checkbox">
     <label for="toggle-all">Mark all as complete</label>
     <ul id="todo-list">
@@ -32,7 +32,7 @@
       </li>
     </ul>
   </section>
-  <footer id="footer">
+  <footer id="footer" ng-show="todos.length">
     <span id="todo-count"><strong>{{ activeCount }}</strong>
       <ng-pluralize count="activeCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
     </span>
