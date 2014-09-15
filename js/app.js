@@ -53,6 +53,18 @@
       $scope.statusFilter = $scope.filters[status];
     });
 
+    $scope.editTodo = function(todo) {
+      $scope.editedTodo = todo;
+    };
+
+    $scope.doneEditing = function(todo) {
+      $scope.editedTodo = null;
+      todo.title = todo.title.trim();
+      if(!todo.title) {
+        $scope.removeTodo(todo);
+      }
+    };
+
   });
 
   module.config(function($routeProvider) {
