@@ -28,13 +28,13 @@
     </span>
     <ul id="filters">
       <li>
-        <a href="#/">All</a>
+        <a ng-class="{selected: statusFilter == filters.all}" href="#/">All</a>
       </li>
       <li>
-        <a href="#/active">Active</a>
+        <a ng-class="{selected: statusFilter == filters.active}" href="#/active">Active</a>
       </li>
       <li>
-        <a href="#/completed">Completed</a>
+        <a ng-class="{selected: statusFilter == filters.completed}" href="#/completed">Completed</a>
       </li>
     </ul>
     <button id="clear-completed" ng-click="removeCompletedTodos()" ng-show="completedCount">Clear completed ({{ completedCount }})</button>
